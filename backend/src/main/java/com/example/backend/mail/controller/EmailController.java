@@ -54,7 +54,7 @@ public class EmailController {
     public ResponseEntity<String> sendEmail(@RequestBody EmailSendRequest emailSendRequest) {
         try {
             // EmailService를 호출하여 이메일 전송
-            emailService.sendEmail(
+            sendService.sendEmail(
                     emailSendRequest.getAccessToken(),
                     emailSendRequest.getRecipient(),
                     emailSendRequest.getSubject(),
