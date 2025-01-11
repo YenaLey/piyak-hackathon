@@ -4,7 +4,11 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 20px;
+
+  >p {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
 }
 
 .profile-select-options {
@@ -47,7 +51,7 @@
 }
 
 .profile-select-result {
-  width: 600px;
+  width: 60%;
   height: 130px;
   border-radius: 10px;
   display: flex;

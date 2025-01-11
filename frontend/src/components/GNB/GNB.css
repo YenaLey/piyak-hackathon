@@ -1,0 +1,45 @@
+.gnbContainer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 16vw;
+  height: 90vh;
+  background-color: #FFF;
+}
+
+.gnbWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.2rem;
+}
+
+.gnbHeader {
+  margin-bottom: 1.6rem; 
+
+  > span {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #697077;
+    text-align: justify;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+  }
+}
+
+.gnbBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.32rem;
+}
+
+.gnbBtn {
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  
+  >img {
+    margin-right: 0.5rem;
+  }
+}

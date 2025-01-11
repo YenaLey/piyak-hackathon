@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Form3Picker.css";
+import { sendForm } from "@/services/axios";
 
 export default function Form3Picker() {
   const initialFormData = (() => {
@@ -8,19 +9,19 @@ export default function Form3Picker() {
       return {
         situation: savedData.situation || "",
         desiredAnswer: savedData.desiredAnswer || "",
-        language: savedData.language || "",
         tone: savedData.tone || "",
       };
     }
     return {
       situation: "",
       desiredAnswer: "",
-      language: "",
       tone: "",
     };
   })();
 
   const [formData, setFormData] = useState(initialFormData);
+  const [selectedLanguage, setSelectedLanguage] = useState("korean");
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
   const saveDataToLocalStorage = useCallback(() => {
     localStorage.setItem("save-form3", JSON.stringify(formData));
@@ -38,14 +39,53 @@ export default function Form3Picker() {
   };
 
   const handleLanguageChange = (language) => {
-    setFormData((prev) => ({ ...prev, language }));
+    setSelectedLanguage(language);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true); // 로딩 시작
+      // 로컬스토리지에서 데이터 가져오기
+      const form1 = JSON.parse(localStorage.getItem("save-form1")) || {};
+      const form2 = JSON.parse(localStorage.getItem("save-form2")) || {};
+      const form3 = JSON.parse(localStorage.getItem("save-form3")) || {};
+
+      // 최종 JSON 구조 생성
+      const finalForm = {
+        form1,
+        form2,
+        form3,
+        language: selectedLanguage, // 기본 언어를 "korean"으로 설정
+        state: "", // 초기 상태 설정
+      };
+
+      console.log("최종 제출 데이터:", finalForm);
+
+      // Axios 요청 보내기
+      const response = await sendForm({ form: finalForm });
+      if (response.status === 200) {
+        console.log("성공적으로 제출되었습니다:", response.data);
+
+        // response.data를 로컬스토리지에 save-form4로 저장
+        localStorage.setItem("save-form4", JSON.stringify(response.data));
+        alert("성공적으로 제출되었습니다! 데이터를 저장했습니다.");
+      } else {
+        console.error("제출 중 오류 발생:", response);
+        alert("제출 중 문제가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("제출 처리 중 오류 발생:", error);
+      alert("제출 중 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false); // 로딩 종료
+    }
   };
 
   return (
     <div className="form3-picker-container">
       <h3>* 어떤 상황인가요?</h3>
       <textarea
-        placeholder="상황을 입력해주세요"
+        placeholder="내용을 입력하세요"
         value={formData.situation}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, situation: e.target.value }))
@@ -55,12 +95,13 @@ export default function Form3Picker() {
 
       <h3>원하는 답변</h3>
       <textarea
-        placeholder="원하는 답변을 입력해주세요"
+        placeholder="내용을 입력해주세요"
         value={formData.desiredAnswer}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, desiredAnswer: e.target.value }))
         }
         className="form3-textarea"
+        style={{ height: "3rem" }}
       />
 
       <h3>언어</h3>
@@ -71,7 +112,7 @@ export default function Form3Picker() {
               key={language}
               onClick={() => handleLanguageChange(language)}
               className={`tone-button ${
-                formData.language === language ? "tone-selected" : ""
+                selectedLanguage === language ? "tone-selected" : ""
               }`}
             >
               {language}
@@ -96,7 +137,14 @@ export default function Form3Picker() {
           )
         )}
       </div>
-      <button>제출</button>
+
+      {isLoading ? ( // 로딩 중일 때 표시
+        <div className="loading-spinner">
+          <p>제출 중입니다... 잠시만 기다려주세요.</p>
+        </div>
+      ) : (
+        <button onClick={handleSubmit}>제출</button>
+      )}
     </div>
   );
 }

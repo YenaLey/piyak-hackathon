@@ -13,10 +13,7 @@ public class Email {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "folder_id", nullable = false)
-    private Integer folderId;
+    private Long id; // Integer -> Long
 
     @Column(name = "title", nullable = false, length = 255)
     private String title;

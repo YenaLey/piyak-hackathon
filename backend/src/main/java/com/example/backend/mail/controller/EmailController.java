@@ -4,6 +4,7 @@ import com.example.backend.mail.model.request.EmailRequest;
 import com.example.backend.mail.model.request.EmailSendRequest;
 import com.example.backend.mail.model.response.EmailResponse;
 import com.example.backend.mail.service.ChatGptService;
+import com.example.backend.mail.service.EmailService;
 import com.example.backend.mail.service.GmailService;
 import com.example.backend.mail.service.GoogleOAuthService;
 import com.example.backend.mail.service.SendService;
@@ -17,18 +18,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class EmailController {
 
-    private final SendService sendService;
-
     private final ChatGptService chatGptService;
+
+    private final EmailService emailService;
+
+    private final SendService sendService;
 
     private final GoogleOAuthService googleOAuthService;
 
     private final GmailService gmailService;
+
+    // 모든 메일 응답 조회
+    @GetMapping("/all")
+    public ResponseEntity<List<EmailResponse>> getAllEmails(@RequestParam String recipientMail) {
+        List<EmailResponse> emails = emailService.getAllEmails(recipientMail);
+        return ResponseEntity.ok(emails);
+    }
+
+    // 저장된 메일 응답 조회
+    @GetMapping("/saved")
+    public ResponseEntity<List<EmailResponse>> getSavedEmails(@RequestParam String recipientMail) {
+        List<EmailResponse> emails = emailService.getSavedEmails(recipientMail);
+        return ResponseEntity.ok(emails);
+    }
+
+    // 전송된 메일 응답 조회
+    @GetMapping("/sent")
+    public ResponseEntity<List<EmailResponse>> getSentEmails(@RequestParam String recipientMail) {
+        List<EmailResponse> emails = emailService.getSentEmails(recipientMail);
+        return ResponseEntity.ok(emails);
+    }
 
     @PostMapping("/generate-mail")
     public ResponseEntity<EmailResponse> generateEmail(@RequestBody EmailRequest emailRequest) {

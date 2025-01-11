@@ -1,0 +1,10 @@
+#header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 10vh;
+  background-color:   beige;
+  border: 1px solid rgba(195, 212, 233, 0.40);
+}

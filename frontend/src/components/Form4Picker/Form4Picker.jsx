@@ -1,57 +1,84 @@
 import { useState, useEffect } from "react";
 import "./Form4Picker.css";
+import { saveState, saveArchive } from "@/services/axios";
 
 export default function Form4Picker() {
   const initialData = (() => {
-    const savedData = JSON.parse(localStorage.getItem("save-form4"));
-    if (savedData) {
-      return {
-        generatedTitle: savedData.generatedTitle || "",
-        generatedContent: savedData.generatedContent || "",
-        recipientMail: "gdgkoreacampus@gmail.com",
-      };
-    }
+    const savedData = JSON.parse(localStorage.getItem("save-form4")) || {};
     return {
-      generatedTitle: "[GDG Campus Korea] 삐약톤 행사 개인 참여자 안내",
-      generatedContent: `안녕하세요.
-GDG Campus Korea입니다.
-
-삐약톤 행사에 관심을 가지고 신청해 주셔서 감사합니다.
-해당 메일을 수령하신 분들께서는 삐약톤 행사에 개인 지원 참여자로 확정되었습니다.
-
-개인 참여자분들은 행사 이전 함께 모여 <팀빌딩>을 진행할 예정입니다.
-모든 팀은 "백엔드 + 클라이언트/프론트 + 디자이너/PM" 구성으로 행사에 참여할 수 있도록 구성될 것입니다.
-체크인 시작 시간 이전에 팀빌딩을 진행하기 위해서 행사장에 10시까지 참여해주실 것을 부탁드립니다.
-더하여, 아래의 안내 사항들을 숙지하여 행사 참여를 부탁드리는 바입니다!
-
-- 행사 일시: 2025년 1월 11일 오전 11시 ~ 1월 12일 오후 2시
-- 행사 장소: 동국대학교 혜화관 2층 고순청 세미나실 (아래 지도 참고)
-- 준비물: 신분증, 개인 노트북 & 충전기, 팀티블러(팀 당 2개 제공), 팀블러 및 보온병(교내 정수기 사용 필수), 담요`,
-      recipientMail: "gdgkoreacampus@gmail.com",
+      id: savedData.id || 0,
+      generatedTitle: savedData.generatedTitle || "",
+      generatedContent: savedData.generatedContent || "",
+      recipientMail: savedData.recipientMail || "",
+      createdAt: savedData.createdAt || "",
+      state: savedData.state || "",
     };
   })();
 
   const [generatedData, setGeneratedData] = useState(initialData);
 
-  const handleSave = () => {
-    const saveData = {
-      generatedTitle: generatedData.generatedTitle,
-      generatedContent: generatedData.generatedContent,
-    };
+  const handleSave = async () => {
+    try {
+      // 첫 번째 API 호출: saveState
+      const saveStateResponse = await saveState({
+        form: {
+          id: generatedData.id,
+          generatedTitle: generatedData.generatedTitle,
+          generatedContent: generatedData.generatedContent,
+          recipientMail: generatedData.recipientMail,
+          createdAt: generatedData.createdAt,
+          state: "saved",
+        },
+      });
 
-    localStorage.setItem("save-form4", JSON.stringify(saveData));
-    alert("데이터가 저장되었습니다!");
+      console.log("saveState 응답:", saveStateResponse);
+
+      // 두 번째 API 호출: saveArchive
+      if (saveStateResponse.status === 200) {
+        const form1 = JSON.parse(localStorage.getItem("save-form1")) || {};
+        const form2 = JSON.parse(localStorage.getItem("save-form2")) || {};
+        const form3 = JSON.parse(localStorage.getItem("save-form3")) || {};
+
+        const saveArchiveResponse = await saveArchive({
+          form: {
+            form1,
+            form2,
+            form3,
+            form4: {
+              generatedTitle: generatedData.generatedTitle,
+              generatedContent: generatedData.generatedContent,
+            },
+            state: "saved",
+          },
+        });
+
+        console.log("saveArchive 응답:", saveArchiveResponse);
+
+        if (saveArchiveResponse.status === 200) {
+          alert("보관함에 저장되었습니다!");
+        } else {
+          alert("보관함 저장 중 문제가 발생했습니다.");
+        }
+      } else {
+        alert("상태 저장 중 문제가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("보관함 저장 중 오류 발생:", error);
+      alert("보관함 저장 중 오류가 발생했습니다.");
+    }
   };
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("save-form4"));
-    if (savedData) {
-      setGeneratedData((prev) => ({
-        ...prev,
-        generatedTitle: savedData.generatedTitle || prev.generatedTitle,
-        generatedContent: savedData.generatedContent || prev.generatedContent,
-      }));
-    }
+    const savedData = JSON.parse(localStorage.getItem("save-form4")) || {};
+    setGeneratedData((prev) => ({
+      ...prev,
+      id: savedData.id || prev.id,
+      generatedTitle: savedData.generatedTitle || prev.generatedTitle,
+      generatedContent: savedData.generatedContent || prev.generatedContent,
+      recipientMail: savedData.recipientMail || prev.recipientMail,
+      createdAt: savedData.createdAt || prev.createdAt,
+      state: savedData.state || prev.state,
+    }));
   }, []);
 
   return (
@@ -64,7 +91,7 @@ GDG Campus Korea입니다.
             <strong>{generatedData.generatedTitle}</strong>
           </div>
           <p className="recipient">
-            받는 사람 <span>{generatedData.recipientMail}</span>
+            받는 사람 <span>{"<"}{generatedData.recipientMail}{">"}</span>
           </p>
           <div className="generated-content">
             {generatedData.generatedContent.split("\n").map((line, index) => (
@@ -74,30 +101,8 @@ GDG Campus Korea입니다.
         </div>
       </div>
 
-      <div className="right-section">
-        <h4>추가 요청, 변경 사항</h4>
-        <textarea
-          placeholder="요청 사항이나 변경 사항을 입력해주세요"
-          className="feedback-textarea"
-        ></textarea>
-
-        <h4>첨부파일 추가</h4>
-        <div className="file-upload">
-          <label htmlFor="file-upload-input" className="file-upload-label">
-            파일을 업로드해주세요
-          </label>
-          <input
-            type="file"
-            id="file-upload-input"
-            className="file-upload-input"
-          />
-        </div>
-
-        <h4>템플릿 등록하기</h4>
-        <button className="template-button" onClick={handleSave}>
-          저장
-        </button>
-      </div>
+      <button onClick={handleSave}>보관함 저장</button>
+      <button>메일 보내기</button>
     </div>
   );
 }

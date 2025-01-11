@@ -6,6 +6,7 @@ import Form4Picker from "@/components/Form4Picker/Form4Picker";
 import ProgressBar from "@/components/ProgressBar/ProgressBar";
 import PageNavigation from "@/components/PageNavigation/PageNavigation";
 import "@/styles/SendMail.css";
+import MarkIcon from "@/image/mark.svg";
 
 export default function SendMail() {
   const totalPages = 4;
@@ -26,13 +27,13 @@ export default function SendMail() {
   const renderTitle = () => {
     switch (currentPage) {
       case 0:
-        return <h2>1. 내 정보 선택하기</h2>;
+        return <h2><img src={MarkIcon} alt="Mark" />내 정보 선택하기</h2>;
       case 1:
-        return <h2>2. 메일 보낼 사람 선택하기</h2>;
+        return <h2><img src={MarkIcon} alt="Mark" />메일 보낼 사람 선택하기</h2>;
       case 2:
-        return <h2>3. 내용 선택하기</h2>;
+        return <h2><img src={MarkIcon} alt="Mark" />내용 선택하기</h2>;
       case 3:
-        return <h2>결과가 나왔어요!</h2>;
+        return <h2><img src={MarkIcon} alt="Mark" />Ai가 맞는 이메일을 만들어주었어요!</h2>;
       default:
         return null;
     }
@@ -55,8 +56,13 @@ export default function SendMail() {
 
   return (
     <div className="send-mail-container">
-      {renderTitle()}
-      <ProgressBar currentPage={currentPage} totalPages={totalPages} />
+      <div className="send-mail-header">
+        <span>메일 보내기</span>
+      </div>
+      <div className="send-mail-progress-bar-container">
+        {renderTitle()}
+        <ProgressBar currentPage={currentPage} totalPages={totalPages} />
+      </div>
       <div className="send-mail-content-box">{renderPage()}</div>
       <PageNavigation
         currentPage={currentPage}

@@ -82,7 +82,7 @@ export default function Form1Picker() {
 
   return (
     <div className="profile-select-container">
-      <h3>나는 누구인가요?</h3>
+      <p>나는 누구인가요?</p>
       <div className="profile-select-options">
         {profiles.length > 0 ? (
           profiles.map((profile, index) => (

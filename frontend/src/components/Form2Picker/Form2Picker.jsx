@@ -56,7 +56,7 @@ export default function Form2Picker() {
   return (
     <div id="recipientPicker">
       <title>
-        <span>상대방은 누구인가요?</span>
+        <p>상대방은 누구인가요?</p>
       </title>
       <section>
         <div>

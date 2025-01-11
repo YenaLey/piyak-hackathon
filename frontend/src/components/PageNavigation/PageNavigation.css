@@ -5,23 +5,26 @@
 }
 
 .navigation-button {
-  padding: 10px 20px;
+  padding: 0.75rem 2rem;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 2.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease, cursor 0.3s ease;
+  font-size: 1rem;
 }
 
 .button-active {
-  background-color: #4caf50;
+  background-color: #45E1E9;
 }
 
 .button-active:hover {
-  background-color: #45a049;
+  background-color: #45E1E9;
 }
 
 .button-disabled {
-  background-color: #ccc;
+  border: 1px solid #ccc;
   cursor: not-allowed;
+  background: transparent;
+  color: #000;
 }
