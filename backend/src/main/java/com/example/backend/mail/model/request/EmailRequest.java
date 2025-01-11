@@ -2,7 +2,6 @@ package com.example.backend.mail.model.request;
 
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 @Data
 @Getter
