@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -54,7 +55,9 @@ public class OauthController {
     public ResponseEntity<?> callback(
             @PathVariable(name = "socialLoginType") SocialLoginType socialLoginType,
             @RequestParam(name = "code") String code,
-            HttpServletResponse response) {
+            HttpServletResponse response) throws IOException {
+
+        System.out.println(socialLoginType);
 
         log.info(">> 소셜 로그인 API 서버로부터 받은 code :: {}", code);
 
@@ -74,11 +77,16 @@ public class OauthController {
 
 
             // 로그인한 유저 정보를 response body로 반환
-            return ResponseEntity.ok(new UserResponse(user.getName(), user.getAccessToken(), user.getProvider()));
+//            return ResponseEntity.ok(new UserResponse(user.getName(), user.getAccessToken(), user.getProvider()));
+            String redirectUrl = "http://localhost:3000/profile?name=" + user.getName() + "&email=" + user.getEmail();
+            response.sendRedirect(redirectUrl);
+
+
         } else {
             log.error(">> 사용자 정보 저장 실패");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("사용자 정보 저장 실패");
         }
+        return null;
     }
 
 }

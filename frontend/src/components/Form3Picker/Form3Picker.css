@@ -15,7 +15,7 @@
   height: 15rem;
   margin-top: 1rem;
   padding: 1rem;
-  display:flex;
+  display: flex;
   justify-content: start;
   border-radius: 5px;
   border: none;
@@ -52,9 +52,9 @@
 }
 
 .tone-selected {
-  background-color: #EFFDFE;
+  background-color: #effdfe;
   color: #000;
-  border-color: #45E1E9;
+  border-color: #45e1e9;
 }
 
 .form3-save-button {
@@ -62,7 +62,7 @@
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #45E1E9;
+  background-color: #45e1e9;
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -70,7 +70,7 @@
 }
 
 .form3-save-button:hover {
-  background-color: #45E1E9;
+  background-color: #45e1e9;
 }
 
 .form3-option-container {
@@ -78,4 +78,46 @@
   width: 75%;
   justify-content: space-between;
   gap: 5rem;
+}
+
+.submit-button {
+  padding: 0.75rem 2rem;
+  color: #fff;
+  background-color: #45e1e9;
+  border: none;
+  border-radius: 2.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 10px;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #45e1e9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

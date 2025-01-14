@@ -1,13 +1,10 @@
 .form4-picker-container {
-  display: flex;
   width: 100%;
-  margin-top: -1rem;
-  border-radius: 10px;
-  justify-content: space-between;
+  height: 100%;
 }
 
-.left-section {
-  width: 40%;
+.form4-picker-content {
+  width: 100%;
 
   > h3 {
     font-size: 1rem;
@@ -16,14 +13,19 @@
 }
 
 .generated-email {
-  padding-right: 20px;
-
   & div {
     background-color: white;
     padding: 15px;
     border-radius: 10px;
     font-size: 14px;
   }
+}
+
+.generated-title {
+  border: none;
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
 }
 
 .recipient {
@@ -40,13 +42,14 @@
 }
 
 .generated-content {
-  height: 25rem;
+  height: 20rem;
+  overflow-y: auto;
 }
 
 .generated-content p {
   margin: 0;
   white-space: pre- wrap;
-  line-height: 150% ;
+  line-height: 150%;
   font-weight: 500;
   font-size: 1rem;
 }
@@ -101,8 +104,8 @@
 }
 
 .template-button:hover {
-  background-color: #45E1E9;
-  border: 1px solid #45E1E9;
+  background-color: #45e1e9;
+  border: 1px solid #45e1e9;
   color: #000;
 }
 
@@ -110,4 +113,24 @@
   display: flex;
   gap: 3rem;
   width: 20rem;
+}
+
+.form4-button-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+
+  & button {
+    background-color: #45e1e9;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, cursor 0.3s ease;
+    font-size: 1rem;
+    border-radius: 2.5rem;
+    border: none;
+    padding: 0.75rem 1.5rem;
+  }
 }

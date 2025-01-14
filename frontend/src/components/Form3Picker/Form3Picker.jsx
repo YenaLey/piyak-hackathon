@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import "./Form3Picker.css";
 import { sendForm } from "@/services/axios";
 
-export default function Form3Picker() {
+export default function Form3Picker({ handleNext }) {
   const initialFormData = (() => {
     const savedData = JSON.parse(localStorage.getItem("save-form3"));
     if (savedData) {
@@ -78,11 +78,17 @@ export default function Form3Picker() {
       alert("제출 중 오류가 발생했습니다.");
     } finally {
       setIsLoading(false); // 로딩 종료
+      handleNext();
     }
   };
 
   return (
     <div className="form3-picker-container">
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+        </div>
+      )}
       <h3>* 어떤 상황인가요?</h3>
       <textarea
         placeholder="내용을 입력하세요"
@@ -138,13 +144,13 @@ export default function Form3Picker() {
         )}
       </div>
 
-      {isLoading ? ( // 로딩 중일 때 표시
-        <div className="loading-spinner">
-          <p>제출 중입니다... 잠시만 기다려주세요.</p>
-        </div>
-      ) : (
-        <button onClick={handleSubmit}>제출</button>
-      )}
+      <button
+        className="submit-button"
+        onClick={handleSubmit}
+        disabled={isLoading}
+      >
+        제출
+      </button>
     </div>
   );
 }

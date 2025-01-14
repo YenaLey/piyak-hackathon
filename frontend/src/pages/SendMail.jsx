@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import usePageNum from "@/hooks/usePageNum";
 import Form1Picker from "@/components/Form1Picker/Form1Picker";
 import Form2Picker from "@/components/Form2Picker/Form2Picker";
 import Form3Picker from "@/components/Form3Picker/Form3Picker";
@@ -9,31 +10,38 @@ import "@/styles/SendMail.css";
 import MarkIcon from "@/image/mark.svg";
 
 export default function SendMail() {
-  const totalPages = 4;
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const handleNext = () => {
-    if (currentPage < totalPages - 1) {
-      setCurrentPage((prev) => prev + 1); // 다음 페이지로 이동
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentPage > 0) {
-      setCurrentPage((prev) => prev - 1); // 이전 페이지로 이동
-    }
-  };
+  const { currentPage, totalPages, handleNext, handlePrevious, setPage } =
+    usePageNum();
 
   const renderTitle = () => {
     switch (currentPage) {
       case 0:
-        return <h2><img src={MarkIcon} alt="Mark" />내 정보 선택하기</h2>;
+        return (
+          <h2>
+            <img src={MarkIcon} alt="Mark" />내 정보 선택하기
+          </h2>
+        );
       case 1:
-        return <h2><img src={MarkIcon} alt="Mark" />메일 보낼 사람 선택하기</h2>;
+        return (
+          <h2>
+            <img src={MarkIcon} alt="Mark" />
+            메일 보낼 사람 선택하기
+          </h2>
+        );
       case 2:
-        return <h2><img src={MarkIcon} alt="Mark" />내용 선택하기</h2>;
+        return (
+          <h2>
+            <img src={MarkIcon} alt="Mark" />
+            내용 선택하기
+          </h2>
+        );
       case 3:
-        return <h2><img src={MarkIcon} alt="Mark" />Ai가 맞는 이메일을 만들어주었어요!</h2>;
+        return (
+          <h2>
+            <img src={MarkIcon} alt="Mark" />
+            Ai가 맞는 이메일을 만들어주었어요!
+          </h2>
+        );
       default:
         return null;
     }
@@ -46,13 +54,17 @@ export default function SendMail() {
       case 1:
         return <Form2Picker />;
       case 2:
-        return <Form3Picker />;
+        return <Form3Picker handleNext={handleNext} />;
       case 3:
         return <Form4Picker />;
       default:
         return null;
     }
   };
+
+  useEffect(() => {
+    setPage(0);
+  }, [setPage]);
 
   return (
     <div className="send-mail-container">
@@ -64,12 +76,14 @@ export default function SendMail() {
         <ProgressBar currentPage={currentPage} totalPages={totalPages} />
       </div>
       <div className="send-mail-content-box">{renderPage()}</div>
-      <PageNavigation
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onNext={handleNext}
-        onPrevious={handlePrevious}
-      />
+      {(currentPage === 0 || currentPage === 1) && (
+        <PageNavigation
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+        />
+      )}
     </div>
   );
 }

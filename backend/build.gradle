@@ -29,11 +29,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-json'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.json:json:20230227'
+	implementation 'org.json:json:20231013'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	runtimeOnly 'org.postgresql:postgresql'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
@@ -42,6 +43,8 @@ dependencies {
 
 	//smtp
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
 
 
 	//gson

@@ -1,16 +1,9 @@
 package com.example.backend.mail.service;
 
-import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.model.*;
-import com.google.api.client.util.Base64;
-
 import jakarta.mail.Authenticator;
 import jakarta.mail.MessagingException;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
-import jakarta.mail.Transport;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
 
 import java.util.Properties;
 import org.springframework.stereotype.Service;
@@ -20,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SendService {
 
-    public void sendEmail(String accessToken, String recipient, String subject, String body) throws MessagingException {
+    public void sendEmail(String accessToken, String recipient, String subject) throws MessagingException {
         // SMTP 서버 설정
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

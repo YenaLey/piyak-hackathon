@@ -78,7 +78,7 @@ public class ChatGptService {
     }
 
     private String getEtiquetteGuidance(String language) {
-        switch (language.toLowerCase()) {
+        switch (language) {
             case "english":
                 return "Please compose the email in English only.";
             case "korean":

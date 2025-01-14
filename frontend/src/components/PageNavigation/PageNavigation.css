@@ -1,7 +1,10 @@
 .navigation-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  gap: 10px;
 }
 
 .navigation-button {
@@ -15,11 +18,11 @@
 }
 
 .button-active {
-  background-color: #45E1E9;
+  background-color: #45e1e9;
 }
 
 .button-active:hover {
-  background-color: #45E1E9;
+  background-color: #45e1e9;
 }
 
 .button-disabled {

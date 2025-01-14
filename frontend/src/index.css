@@ -4,6 +4,7 @@ body,
 code {
   margin: 0;
   padding: 0;
+  background: #f2f8f8;
 }
 
 * {

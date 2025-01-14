@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import useRecipientStore from "@/hooks/useRecipientStore";
 import "./Form2Picker.css";
 
 function RecipientInputField({ label, type, value, required, onChange }) {
@@ -18,8 +17,6 @@ function RecipientInputField({ label, type, value, required, onChange }) {
 }
 
 export default function Form2Picker() {
-  const { setRecipient } = useRecipientStore();
-
   const initialRecipientData = (() => {
     const savedDataString = localStorage.getItem("save-form2");
     if (savedDataString) {
@@ -44,7 +41,6 @@ export default function Form2Picker() {
 
   const handleChange = (field, value) => {
     setRecipientData((prev) => ({ ...prev, [field]: value }));
-    setRecipient({ [field]: value });
   };
 
   useEffect(() => {
