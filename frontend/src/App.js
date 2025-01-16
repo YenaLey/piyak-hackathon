@@ -1,24 +1,35 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProfileForm from "@/pages/ProfileForm";
+import SendMail from "@/pages/SendMail";
+import Home from "@/pages/Home";
+import Header from "@/components/Header/Header";
+import GNB from "@/components/GNB/GNB";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+        {" "}
+        <Header />
+        <div
+          style={{
+            display: "flex",
+            height: "100vh",
+            paddingLeft: "16vw",
+            paddingTop: "10vh",
+            overflow: "auto",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <GNB />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<ProfileForm />} />
+            <Route path="/send-mail" element={<SendMail />} />
+            <Route path="/*" element={<ProfileForm />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 

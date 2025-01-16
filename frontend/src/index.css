@@ -1,13 +1,13 @@
+@import "./fonts/pretendard.css";
+
 body,
 code {
   margin: 0;
   padding: 0;
-  font-family: "Acme", sans-serif;
-  background-color: #d2e0fb;
+  background: #f2f8f8;
 }
 
 * {
   box-sizing: border-box;
+  font-family: "Pretendard", sans-serif;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Acme&family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&family=Jua&family=Poor+Story&display=swap");

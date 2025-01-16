@@ -1,0 +1,12 @@
+services:
+  springboot_project:
+    image: zhzkal2/github-actions-hackathon:latest
+    container_name: springboot-hackathon
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network2
+
+networks:
+  my-network2:
+    driver: bridge

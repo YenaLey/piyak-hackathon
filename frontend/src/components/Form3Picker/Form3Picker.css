@@ -1,0 +1,123 @@
+.form3-picker-container {
+  width: 100%;
+  /* max-width: 600px; */
+  text-align: center;
+
+  & h3 {
+    margin-top: 2rem;
+    font-size: 1rem;
+    text-align: start;
+  }
+}
+
+.form3-textarea {
+  width: 75%;
+  height: 15rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: start;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+  resize: none;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tone-options {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.tone-button {
+  flex: 1 1 calc(30% - 10px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.tone-button:hover {
+  background-color: #f0f0f0;
+}
+
+.tone-selected {
+  background-color: #effdfe;
+  color: #000;
+  border-color: #45e1e9;
+}
+
+.form3-save-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #45e1e9;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form3-save-button:hover {
+  background-color: #45e1e9;
+}
+
+.form3-option-container {
+  display: flex;
+  width: 75%;
+  justify-content: space-between;
+  gap: 5rem;
+}
+
+.submit-button {
+  padding: 0.75rem 2rem;
+  color: #fff;
+  background-color: #45e1e9;
+  border: none;
+  border-radius: 2.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 10px;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #45e1e9;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

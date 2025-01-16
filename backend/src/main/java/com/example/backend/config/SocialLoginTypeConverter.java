@@ -1,6 +1,6 @@
 package com.example.backend.config;
 
-import com.example.backend.login.model.entity.SocialLoginType;
+import com.example.backend.user.model.entity.SocialLoginType;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 

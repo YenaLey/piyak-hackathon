@@ -1,0 +1,136 @@
+.form4-picker-container {
+  width: 100%;
+  height: 100%;
+}
+
+.form4-picker-content {
+  width: 100%;
+
+  > h3 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+
+.generated-email {
+  & div {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
+
+.generated-title {
+  border: none;
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+}
+
+.recipient {
+  font-size: 0.8rem;
+  letter-spacing: 0.03rem;
+  margin-left: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.recipient span {
+  font-weight: bold;
+}
+
+.generated-content {
+  height: 20rem;
+  overflow-y: auto;
+}
+
+.generated-content p {
+  margin: 0;
+  white-space: pre- wrap;
+  line-height: 150%;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.right-section {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-right: 5rem;
+}
+
+.feedback-textarea {
+  margin-top: -1rem;
+  width: 100%;
+  height: 80px;
+  resize: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.file-upload {
+  text-align: center;
+}
+
+.file-upload-label {
+  display: block;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.file-upload-input {
+  display: none;
+}
+
+.template-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  color: #697077;
+  border-radius: 2.5rem;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #697077;
+}
+
+.template-button:hover {
+  background-color: #45e1e9;
+  border: 1px solid #45e1e9;
+  color: #000;
+}
+
+.template-button-container {
+  display: flex;
+  gap: 3rem;
+  width: 20rem;
+}
+
+.form4-button-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+
+  & button {
+    background-color: #45e1e9;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, cursor 0.3s ease;
+    font-size: 1rem;
+    border-radius: 2.5rem;
+    border: none;
+    padding: 0.75rem 1.5rem;
+  }
+}

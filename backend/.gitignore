@@ -46,3 +46,6 @@ out/
 target/
 
 /frontend/
+
+backend/src/main/resources/
+docker-compose.yml
