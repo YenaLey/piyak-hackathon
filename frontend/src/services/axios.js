@@ -1,4 +1,5 @@
 import axiosInstance from "./axiosConfig";
+import React, { useState } from "react";
 
 // 소셜 로그인 API 호출
 export const socialLogin = async (socialLoginType) => {
@@ -9,8 +10,8 @@ export const socialLogin = async (socialLoginType) => {
 };
 
 // AI에게 내용 보내기
-export const sendForm = async ({ form }) => {
-  const response = await axiosInstance.post(`api/generate-mail`, { form });
+export const sendForm = async (form) => {
+  const response = await axiosInstance.post(`api/generate-mail`, form);
   const { status, data } = response;
   return { status, data };
 };

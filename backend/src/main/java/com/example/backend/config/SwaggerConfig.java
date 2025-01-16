@@ -11,13 +11,13 @@ import java.util.List;
 
 @Configuration
 public class SwaggerConfig {
-    @Bean
-    public OpenAPI openAPI() {
-        return new OpenAPI()
-                .components(new Components())
-                .info(apiInfo())
-                .servers(servers()); // HTTPS 서버 설정 추가
-    }
+    // @Bean
+    // public OpenAPI openAPI() {
+    //     return new OpenAPI()
+    //             .components(new Components())
+    //             .info(apiInfo())
+    //             .servers(servers()); // HTTPS 서버 설정 추가
+    // }
 
     private Info apiInfo() {
         return new Info()
@@ -26,12 +26,12 @@ public class SwaggerConfig {
                 .version("1.0.0"); // API의 버전
     }
 
-    private List<Server> servers() {
-        Server httpsServer = new Server()
-                .url("https://ffd6-210-94-220-228.ngrok-free.app") // HTTPS URL로 설정
-                .description("ngrok 서버"); // 설명 추가
+    // private List<Server> servers() {
+    //     Server httpsServer = new Server()
+    //             .url("https://ffd6-210-94-220-228.ngrok-free.app") // HTTPS URL로 설정
+    //             .description("ngrok 서버"); // 설명 추가
 
-        // 필요한 경우 다른 환경 (예: 테스트 서버) 추가 가능
-        return List.of(httpsServer);
-    }
+    //     // 필요한 경우 다른 환경 (예: 테스트 서버) 추가 가능
+    //     return List.of(httpsServer);
+    // }
 }

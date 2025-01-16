@@ -62,7 +62,7 @@ export default function Form3Picker({ handleNext }) {
       console.log("최종 제출 데이터:", finalForm);
 
       // Axios 요청 보내기
-      const response = await sendForm({ form: finalForm });
+      const response = await sendForm(finalForm);
       if (response.status === 200) {
         console.log("성공적으로 제출되었습니다:", response.data);
 
